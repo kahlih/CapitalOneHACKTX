@@ -115,7 +115,7 @@ var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/ima
 
             var thing = new google.maps.Marker({
                 position: myLatLng,
-                title: 'Open '+ atmEntries[k].hours;
+                title: 'Open '+ atmEntries[k].hours,
                 map: map,
                 icon: atm
             });
