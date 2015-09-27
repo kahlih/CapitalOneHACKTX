@@ -30,14 +30,8 @@ $.ajax({
         atm();
     }
 });
-
-
     }
 });
-
-
-
-
 
 
 function atm() {
@@ -55,8 +49,6 @@ function atm() {
         bankEntries.push(bankResponse[i]);
         //console.log(bankEntries[i].geocode);
     }
-
-
     initialize(atmEntries, bankEntries);
 }
 
@@ -126,8 +118,6 @@ var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/ima
 
     }
 
-
-
     for (k = 0; k < atmEntries.length; k++) {
 
 
@@ -155,19 +145,19 @@ var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/ima
 
 
 
-    google.maps.event.addDomListener(window, 'reload', initialize);
+  //  google.maps.event.addDomListener(window, 'reload', initialize);
 
 }
 
 
 
-function reloadTiles() {
-    var tiles = $("#map").find("img");
-    for (var i = 0; i < tiles.length; i++) {
-        var src = $(tiles[i]).attr("src");
-        if (/googleapis.com\/vt\?pb=/.test(src)) {              
-            var new_src = src.split("&ts")[0] + '&ts=' + (new Date()).getTime();
-            $(tiles[i]).attr("src", new_src);                                                   
-        }               
-    }
-}   
+// function reloadTiles() {
+//     var tiles = $("#map").find("img");
+//     for (var i = 0; i < tiles.length; i++) {
+//         var src = $(tiles[i]).attr("src");
+//         if (/googleapis.com\/vt\?pb=/.test(src)) {              
+//             var new_src = src.split("&ts")[0] + '&ts=' + (new Date()).getTime();
+//             $(tiles[i]).attr("src", new_src);                                                   
+//         }               
+//     }
+// }   
