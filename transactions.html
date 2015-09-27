@@ -15,6 +15,8 @@
 
     <!-- Custom CSS -->
     <link href="css/the-big-picture.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./js/transactions.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,18 +76,14 @@
 
 
 
-
-
-
-
-
-
     <div class="container">
       <div class="row">
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="text-center">
-            <h2>First Middle Last</h2>
+            <h2>
+                <script>document.write(customerResponse.first_name + " " + customerResponse.last_name);</script> 
+            </h2>
             <img src="css/avatar.jpg" alt="avatar">
           </div>
         </div>
@@ -109,42 +107,66 @@
             <div class="container">
                 <label class="col-lg-2 control-label">First name:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="Jane" type="text">
+                    <input class="form-control" type="text" id="first_name">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("first_name");
+                            elem.value = customerResponse.first_name;
+                        </script>
                 </div>
             </div>
             <br>
             <div class="container">
                 <label class="col-lg-2 control-label">Last name:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="Doe" type="text">
+                    <input class="form-control" id="last_name" type="text">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("last_name");
+                            elem.value = customerResponse.last_name;
+                        </script>                
                 </div>
             </div>
             <br>
             <div class="container">
                 <label class="col-lg-2 control-label">Street:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="1234 Holmes Dr" type="text">
+                    <input class="form-control" id="address" type="text">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("address");
+                            elem.value = customerResponse.address.street_number + " " + customerResponse.address.street_name;
+                        </script>                     
                 </div>
             </div>
             <br>
             <div class="container">
                 <label class="col-lg-2 control-label">City:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="Austin" type="text">
+                    <input class="form-control" id="city" type="text">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("city");
+                            elem.value = customerResponse.address.city;
+                        </script>
                 </div>
             </div>
             <br>
             <div class="container">
                 <label class="col-lg-2 control-label">State:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="Tx" type="text">
+                    <input class="form-control" id="state" type="text">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("state");
+                            elem.value = customerResponse.address.state;
+                        </script>
                 </div>
             </div>
             <br>
             <div class="container">
                 <label class="col-lg-2 control-label">Zip:</label>
                 <div class="col-lg-6">
-                    <input class="form-control" value="11111" type="text">
+                    <input class="form-control" id="zip" type="text">
+                        <script type="text/javascript">
+                            var elem = document.getElementById("zip");
+                            elem.value = customerResponse.address.zip;
+                        </script>
                 </div>
             </div>
             <br>
