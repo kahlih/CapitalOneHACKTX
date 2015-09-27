@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="full" lang="en">
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
@@ -64,15 +64,122 @@
         <div class="row">
             <div class="col-md-5 col-md-offset-6">
                 <div class="text-center">
-                    <h1>Capital One Virtual ATM</h1>
-                    <br>
-                    <h3>What's in your wallet?</h3>
+
                     <!--<a class="btn btn-default" href="map.html" role="button">Find One Near You</a>-->
                 </div>
             </div>
         </div>
         <!-- /.row -->
     </div>
+
+
+
+
+
+
+
+
+
+    <div class="container">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="text-center">
+            <h2>First Middle Last</h2>
+            <img src="css/avatar.jpg" alt="avatar">
+          </div>
+        </div>
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+        
+
+        <!-- TABS -->
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+            <li><a data-toggle="tab" href="#withdraw">Withdraw</a></li>
+            <li><a data-toggle="tab" href="#transfer">Transfer</a></li>
+            <li><a data-toggle="tab" href="#deposit">Deposit</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="profile" class="tab-pane fade in active">
+            <h3>Profile</h3>
+
+            <div class="container">
+                <label class="col-lg-2 control-label">First name:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="Jane" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <label class="col-lg-2 control-label">Last name:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="Doe" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <label class="col-lg-2 control-label">Street:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="1234 Holmes Dr" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <label class="col-lg-2 control-label">City:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="Austin" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <label class="col-lg-2 control-label">State:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="Tx" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <label class="col-lg-2 control-label">Zip:</label>
+                <div class="col-lg-6">
+                    <input class="form-control" value="11111" type="text">
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-default">Update</button>
+                </div>
+            </div>
+
+
+            </div>
+            <div id="withdraw" class="tab-pane fade">
+                <h3>Withdraw</h3>
+                <p>Withdraw a certain amount from your account</p>
+                <br>
+                <div class="container">
+                    <label class="col-lg-2 control-label">Current Balance: </label>
+                </div>
+                <br>
+                <div class="container">
+                    <label class="col-lg-2 control-label">Amount to Withdraw: </label>
+                </div>
+
+            </div>
+            <div id="transfer" class="tab-pane fade">
+              <h3>Transfer</h3>
+              <p>Transfer any amount of money between accounts</p>
+            </div>
+            <div id="deposit" class="tab-pane fade">
+              <h3>Deposit</h3>
+              <p>Make a Deposit</p>
+            </div>
+          </div>
+        </div>
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
