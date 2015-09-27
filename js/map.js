@@ -53,7 +53,7 @@ function updater() {
 function initialize(atmEntries) {
 
 
-var bus = 'https://raw.githubusercontent.com/mannypamintuan/atxbusmap/master/images/bus.png';
+var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/piggybank.png';
 
 
 //sets the layout of the google map
@@ -109,8 +109,8 @@ var bus = 'https://raw.githubusercontent.com/mannypamintuan/atxbusmap/master/ima
             var thing = new google.maps.Marker({
                 position: myLatLng,
                 title: atmEntries[k].route + ' ' + atmEntries[k].direction,
-                map: map
-               // icon: bus
+                map: map,
+                icon: atm
             });
 
             marker.push(thing);
