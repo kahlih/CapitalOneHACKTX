@@ -1,0 +1,3 @@
+#outerdiv {border: 1px solid black; width: 100%; height: 100%; position:fixed; text-align:center}
+#map {border: 1px solid black; width: 100%; height: 100%; margin:0px auto; display:inline-block}
+html, body { height: 100%; }
