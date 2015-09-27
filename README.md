@@ -9,5 +9,5 @@ For the HackTX 2015 Session
 
 
 Team members:
-  * Kahli Holmes @kahlih
-  * Manny Pamintuan @mannypamintuan
+  * Kahli Holmes [@kahlih](http://github.com/kahlih)
+  * Manny Pamintuan [@mannypamintuan](http://github.com/mannypamintuan)
