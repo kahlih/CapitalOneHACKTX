@@ -103,6 +103,31 @@ var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/ima
     var trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
 
+        for (k = 0; k < bankEntries.length; k++) {
+
+
+ 
+            myLatLng = {
+                lat: parseFloat(bankEntries[k].geocode.lat),
+                lng: parseFloat(bankEntries[k].geocode.lng)
+            };
+
+
+            var thing = new google.maps.Marker({
+                position: myLatLng,
+                //title: bankEntries[k].route + ' ' + bankEntries[k].direction,
+                map: map,
+                icon: bank
+            });
+
+            marker.push(thing);
+
+
+
+    }
+
+
+
     for (k = 0; k < atmEntries.length; k++) {
 
 
@@ -126,28 +151,7 @@ var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/ima
 
     }
 
-        for (k = 0; k < bankEntries.length; k++) {
 
-
- 
-            myLatLng = {
-                lat: parseFloat(bankEntries[k].geocode.lat),
-                lng: parseFloat(bankEntries[k].geocode.lng)
-            };
-
-
-            var thing = new google.maps.Marker({
-                position: myLatLng,
-                //title: bankEntries[k].route + ' ' + bankEntries[k].direction,
-                map: map,
-                icon: bank
-            });
-
-            marker.push(thing);
-
-
-
-    }
 
 
 
