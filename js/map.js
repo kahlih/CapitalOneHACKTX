@@ -1,5 +1,5 @@
 var atmResponse;
-var atmEntries;
+var atmatmEntries;
 var bankResponse;
 var bankEntries;
 var marker = [];
@@ -10,7 +10,6 @@ var mapOptions;
 var myLatLng;
 
 
-
 //request to get the atm data
 $.ajax({
     url: "http://api.reimaginebanking.com/atms?lat=39.1938439&lng=-76.8650825&rad=25&key=751e3f6f45743be67593eadf8e4f40be",
@@ -19,23 +18,24 @@ $.ajax({
     async: true,
     success: function(data) {
         atmResponse = data;
-        atm();
-        data ={};
-    }
-});
-
-//request to get the bank data
-$.ajax({
+        
+        //request to get the bank data
+    $.ajax({
     url: "http://api.reimaginebanking.com/branches?key=751e3f6f45743be67593eadf8e4f40be",
     type: 'GET',
     dataType: "json",
     async: true,
-    success: function(data) {
-        bankResponse = data;
-        bank();
+    success: function(Bankdata) {
+        bankResponse = Bankdata;
+        atm();
+    }
+});
+
 
     }
 });
+
+
 
 
 
@@ -49,14 +49,7 @@ function atm() {
         //console.log(atmEntries[i].geocode);
     }
 
-
-    initialize(atmEntries);
-}
-
-
-function bank() {
-
-    bankEntries = [];
+        bankEntries = [];
     for (i = 0; i < bankResponse.length; i++) {
 
         bankEntries.push(bankResponse[i]);
@@ -64,18 +57,16 @@ function bank() {
     }
 
 
-    bankInitialize(bankEntries);
+    initialize(atmEntries, bankEntries);
 }
 
 
-
-
-
 //initialize the map
-function initialize(entries) {
+function initialize(atmEntries, bankEntries) {
 
 
 var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/piggybank.png';
+var bank = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/bank.png';
 
 
 //sets the layout of the google map
@@ -109,28 +100,22 @@ var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/imag
     map.mapTypes.set(customMapTypeId, customMapType);
     map.setMapTypeId(customMapTypeId);
 
-
-
-
-
-
-
     var trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
 
-    for (k = 0; k < entries.length; k++) {
+    for (k = 0; k < atmEntries.length; k++) {
 
 
  
             myLatLng = {
-                lat: parseFloat(entries[k].geocode.lat),
-                lng: parseFloat(entries[k].geocode.lng)
+                lat: parseFloat(atmEntries[k].geocode.lat),
+                lng: parseFloat(atmEntries[k].geocode.lng)
             };
 
 
             var thing = new google.maps.Marker({
                 position: myLatLng,
-                //title: entries[k].route + ' ' + entries[k].direction,
+                //title: atmEntries[k].route + ' ' + atmEntries[k].direction,
                 map: map,
                 icon: atm
             });
@@ -141,79 +126,31 @@ var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/imag
 
     }
 
-
-
-    google.maps.event.addDomListener(window, 'reload', initialize);
-
-}
-
-
-//initialize the map
-function bankInitialize(entries) {
-
-
-//var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/piggybank.png';
-
-
-//sets the layout of the google map
-    var customMapType = new google.maps.StyledMapType([{
-        "stylers": [{
-            "hue": "#0000ff"
-        }, {
-            "saturation": -79
-        }, {
-            "gamma": 0.51
-        }, {
-            "visibility": "on"
-        }, {
-            "weight": 1.4
-        }]
-    }], {
-        name: 'Custom Style'
-    });
-    var customMapTypeId = 'custom_style';
-
-    mapCanvas = document.getElementById('map');
-    mapOptions = {
-        center: new google.maps.LatLng(39.2073984, -76.82441),
-        zoom: 11,
-                mapTypeControlOptions: {
-            mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
-        },
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    map = new google.maps.Map(mapCanvas, mapOptions);
-    map.mapTypes.set(customMapTypeId, customMapType);
-    map.setMapTypeId(customMapTypeId);
-
-
-
-
-
-
-
-    var trafficLayer = new google.maps.TrafficLayer();
-    trafficLayer.setMap(map);
-
-    for (k = 0; k < entries.length; k++) {
+        for (k = 0; k < bankEntries.length; k++) {
 
 
  
             myLatLng = {
-                lat: parseFloat(entries[k].geocode.lat),
-                lng: parseFloat(entries[k].geocode.lng)
+                lat: parseFloat(bankEntries[k].geocode.lat),
+                lng: parseFloat(bankEntries[k].geocode.lng)
             };
 
 
             var thing = new google.maps.Marker({
                 position: myLatLng,
-                //title: entries[k].route + ' ' + entries[k].direction,
-                map: map
-               // icon: atm
+                //title: bankEntries[k].route + ' ' + bankEntries[k].direction,
+                map: map,
+                icon: bank
             });
 
             marker.push(thing);
+
+
+
     }
+
+
+
     google.maps.event.addDomListener(window, 'reload', initialize);
 
 }
