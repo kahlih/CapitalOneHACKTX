@@ -1,5 +1,7 @@
 var atmResponse;
 var atmEntries;
+var bankResponse;
+var bankEntries;
 var marker = [];
 var map;
 var counter = 0;
@@ -9,7 +11,7 @@ var myLatLng;
 
 
 
-//request to get the bus data
+//request to get the atm data
 $.ajax({
     url: "http://api.reimaginebanking.com/atms?lat=39.1938439&lng=-76.8650825&rad=25&key=751e3f6f45743be67593eadf8e4f40be",
     type: 'GET',
@@ -17,7 +19,20 @@ $.ajax({
     async: true,
     success: function(data) {
         atmResponse = data;
-        done();
+        atm();
+        data ={};
+    }
+});
+
+//request to get the bank data
+$.ajax({
+    url: "http://api.reimaginebanking.com/branches?key=751e3f6f45743be67593eadf8e4f40be",
+    type: 'GET',
+    dataType: "json",
+    async: true,
+    success: function(data) {
+        bankResponse = data;
+        bank();
 
     }
 });
@@ -25,7 +40,7 @@ $.ajax({
 
 
 
-function done() {
+function atm() {
 
     atmEntries = [];
     for (i = 0; i < atmResponse.data.length; i++) {
@@ -38,19 +53,26 @@ function done() {
     initialize(atmEntries);
 }
 
-function updater() {
-    atmEntries = [];
-    for (i = 0; i < atmResponse.length; i++) {
 
-        atmEntries.push(atmResponse[i]);
+function bank() {
+
+    bankEntries = [];
+    for (i = 0; i < bankResponse.length; i++) {
+
+        bankEntries.push(bankResponse[i]);
+        //console.log(bankEntries[i].geocode);
     }
 
-    updateMarkers(atmEntries);
+
+    bankInitialize(bankEntries);
 }
 
 
+
+
+
 //initialize the map
-function initialize(atmEntries) {
+function initialize(entries) {
 
 
 var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/piggybank.png';
@@ -96,19 +118,19 @@ var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/imag
     var trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
 
-    for (k = 0; k < atmEntries.length; k++) {
+    for (k = 0; k < entries.length; k++) {
 
 
  
             myLatLng = {
-                lat: parseFloat(atmEntries[k].geocode.lat),
-                lng: parseFloat(atmEntries[k].geocode.lng)
+                lat: parseFloat(entries[k].geocode.lat),
+                lng: parseFloat(entries[k].geocode.lng)
             };
 
 
             var thing = new google.maps.Marker({
                 position: myLatLng,
-                title: atmEntries[k].route + ' ' + atmEntries[k].direction,
+                //title: entries[k].route + ' ' + entries[k].direction,
                 map: map,
                 icon: atm
             });
@@ -125,28 +147,77 @@ var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/imag
 
 }
 
-// function updateMarkers(atmEntries) {
 
-// //var bus = 'https://raw.githubusercontent.com/mannypamintuan/atxbusmap/master/images/bus.png';
+//initialize the map
+function bankInitialize(entries) {
 
-//     for (k = 0; k < atmEntries.length; k++) {
-//  if (atmEntries[k].inservice === "Y") {
-//             myLatLng = {
-//                 lat: parseFloat(atmEntries[k].location.substring(0, atmEntries[k].location.indexOf(",") - 1)),
-//                 lng: parseFloat(atmEntries[k].location.substring(atmEntries[k].location.indexOf(",") + 1, atmEntries[k].location.length))
-//             };
-//            // console.log("Updated!");
-//         var thing = new google.maps.Marker({
-//                 position: myLatLng,
-//                 title: atmEntries[k].route + ' ' + atmEntries[k].direction,
-//                 map: map,
-//                 //icon: bus
-//             });
-//            marker.push(thing);
 
-//         }
-//     }
-// }
+//var atm = 'https://raw.githubusercontent.com/kahlih/CapitalOneHACKTX/master/images/piggybank.png';
+
+
+//sets the layout of the google map
+    var customMapType = new google.maps.StyledMapType([{
+        "stylers": [{
+            "hue": "#0000ff"
+        }, {
+            "saturation": -79
+        }, {
+            "gamma": 0.51
+        }, {
+            "visibility": "on"
+        }, {
+            "weight": 1.4
+        }]
+    }], {
+        name: 'Custom Style'
+    });
+    var customMapTypeId = 'custom_style';
+
+    mapCanvas = document.getElementById('map');
+    mapOptions = {
+        center: new google.maps.LatLng(39.2073984, -76.82441),
+        zoom: 11,
+                mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+        },
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(mapCanvas, mapOptions);
+    map.mapTypes.set(customMapTypeId, customMapType);
+    map.setMapTypeId(customMapTypeId);
+
+
+
+
+
+
+
+    var trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(map);
+
+    for (k = 0; k < entries.length; k++) {
+
+
+ 
+            myLatLng = {
+                lat: parseFloat(entries[k].geocode.lat),
+                lng: parseFloat(entries[k].geocode.lng)
+            };
+
+
+            var thing = new google.maps.Marker({
+                position: myLatLng,
+                //title: entries[k].route + ' ' + entries[k].direction,
+                map: map
+               // icon: atm
+            });
+
+            marker.push(thing);
+    }
+    google.maps.event.addDomListener(window, 'reload', initialize);
+
+}
+
 
 
 function reloadTiles() {
@@ -159,37 +230,3 @@ function reloadTiles() {
         }               
     }
 }   
-
-
-
-//var markers = marker;
-//console.log(markers);
-
-// function test(fee, currentMap) {
-//     var counter = 0;
-
-//     setInterval(function() {
-
-//         for (i = 0; i < fee.length; i++) {
-//             console.log(fee[i]);
-//             fee[i].setMap(null);
-//         }
-
-//         $.ajax({
-//             url: "https://data.texas.gov/resource/9e7h-gz56.json",
-//             type: 'GET',
-//             dataType: "json",
-//             async: true,
-//             success: function(data) {
-//                 atmResponse = data;
-//                 updater();
-//             }
-//         });
-
-//     }, 20000);
-
-//     setInterval(reloadTiles, 5000);       
-
-// };
-
-// test(markers, map);
